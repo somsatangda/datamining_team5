@@ -76,7 +76,7 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 - 정류소현황(2019~2023).xlsx : 교통 접근성: 자치구별 정류소 수, 평균 노선 수
 - 서울시 노인 교통사고 통계.xlsx : 노인 대상 보행 사고 통계 수치
     </pre>
-![image](사진 자료 : 각 엑셀 파일 캡처본)
+
 ### 사용한 변수 목록
 <pre>
 - 1인당 복지관 수
@@ -89,7 +89,6 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 - 1인당 독거노인 수
 - 추정 노인 자살률
     </pre>
-![image](사진 및 코드 첨부)
 
 ## 3. 데이터 전처리
 - 변수별 처리 내용
@@ -280,34 +279,130 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
     - 문자형 → 수치형 변환
     - 결측치(NaN) → 0 또는 평균값으로 대체
 - 최종적으로 분석에 사용한 전처리 데이터
-- <img src="https://github.com/user-attachments/assets/8b6efd1d-5b97-4e59-913e-575f9ea6cc3d" width="400" height="350"/>
+- <img src="https://github.com/user-attachments/assets/8b6efd1d-5b97-4e59-913e-575f9ea6cc3d" width="700" height="350"/>
 
 ## 4. EDA
-- boxplot : 변수들의 이상치 및 분포 확인
+- boxplot : 변수들의 분포 확인
 <pre>
-전체 변수에 대해 boxplot을 이용한 시각화를 수행하였다. 이를 통해 변수 간 분포 범위, 이상치(outlier)의 존재 여부, 데이터 스케일 차이 등을 직관적으로 파악할 수 있었다.
+전체 변수에 대해 boxplot을 이용한 시각화를 수행하였다. 이를 통해 변수 간 분포 범위,  데이터 스케일 차이 등을 직관적으로 파악할 수 있었다.
 
-- 독거노인 수, 요양보호사 수, 정류장 수 등에서 극단값(outlier)이 존재
 - 자살률, 복지관 수, 평균 노선 수 등은 상대적으로 좁은 범위를 가짐
 - 변수 간 스케일이 다양하므로 이후 분석에서는 Z-score 표준화가 필수적임
     </pre>
-![image](시각화 자료 : 각 변수 별 boxplot)
-- 변수 간 특성 차이 시각화 및 이상치 탐색
-![image](시각화 자료 : 변수 간 분포 비교)
+<img src="https://github.com/user-attachments/assets/847501d3-591b-4df2-ab0d-7a8e3ffc973c" width="500" height="400"/>
+<img src="https://github.com/user-attachments/assets/36ff6a54-90d6-4fbf-8dc8-a3ea92ecffba" width="500" height="400"/>
 
 ## 5. k-means 클러스터링
 <pre>
 (1) 주요 변수들을 노인 인구 수로 나누어 1인당 기준으로 환산
 (2) StandardScaler를 활용해 모든 수치형 변수 정규화
-(3) k=2~10까지의 경우를 PCA 분석을 통해 2차원으로 축소하여 시각화 및 클러스터링 수행
+(3) PCA 분석을 통해 2차원으로 축소하여 시각화 및 클러스터링 수행
 <img src="https://github.com/user-attachments/assets/32f0cbf0-df83-42b2-afc5-b7862dcd4c88" width="500" height="350"/>
-(4) 2차원 PCA결과에 대해 k=2~6까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)
+(4) 2차원 PCA결과에 대해 k=2~10까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)
 (5) 최종적으로 k=3으로 클러스터링 수행 후 k=2~6까지의 경우를 시각화를 통해 지역 분포 확인
 <img src="https://github.com/user-attachments/assets/38c527cb-f2b9-47cc-aed0-a12c2e30a287" width="500" height="350"/)
+
+
+- 분석 결과 해석
+<img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="400" height="300"/>
+-cluster 0 : 광진구, 동대문구, 중랑구, 성북구, 강북구, 도봉구, 노원구, 은평구, 양천구, 강서구, 구로구, 관악구, 송파구, 강동구
+    - 노인 인구와 관련 인프라가 가장 크고 풍부한 지역이며, 노인 인구와 요양보호사 수가 많음
+    - "실버 메가폴리스" 지역
+-cluster 1 : 용산구, 성동구, 서대문구, 마포구, 영등포구, 동작구, 서초구, 강남구
+    - 안정적이고, 노인 관련 서비스도 적당히 분포된 균형 지역이며, 저소득 노인 비율이 가장 낮음
+    - "실버 밸런스 존" 지역
+-cluster 2 : 종로구, 중구, 금천구
+    - 노인 인프라는 적지만, 사회적 약자 비율이 높고, 복지관 종사자 비율이 두드러지는 지역. 
+    - "실버 케어 니즈 존" 지역
+
+- 정책 도입 우선순위 도출
+    - 변수 카테고리 : 인프라, 서비스, 이동성, 취약성
+    - 변수별 가중치 설정 : 전문가가 평가한 정책별 중요도 평가를 통해서 가중치 설정함
+    ```python
+    #  카테고리별 변수 지정
+    infra_vars = ['1인당 복지관 수', '1인당 노인의료복지시설 수', '1인당 재가노인복지시설 수']
+    service_vars = ['요양보호사 수', '1인당 복지관종사자 수']
+    mobility_vars = ['1인당 정류장수', '평균노선수']
+    vulnerable_vars = ['1인당 독거노인 합계', '추정 노인 자살률']
+    
+    #  Z-score로 표준화
+    standardized = (cluster_summary - cluster_summary.mean()) / cluster_summary.std()
+    
+    # 가중치 설정
+    weights = {
+        'infra': 0.15,
+        'service': 0.25,
+        'mobility': 0.15,
+        'vulnerable': 0.45
+    }
+    ```
+    ![image](시각화 자료 : 정책 영역별 중요성)
+    ```python
+    # 카테고리별 평균 점수 (취약계층 역방향)
+    infra_score = standardized[infra_vars].mean(axis=1)
+    service_score = standardized[service_vars].mean(axis=1)
+    mobility_score = standardized[mobility_vars].mean(axis=1)
+    vulnerable_score = -standardized[vulnerable_vars].mean(axis=1)
+    
+    # 가중합으로 최종 우선순위 점수 계산
+    priority_score = (
+        infra_score * weights['infra'] +
+        service_score * weights['service'] +
+        mobility_score * weights['mobility'] +
+        vulnerable_score * weights['vulnerable']
+    )
+    
+    # 결과 데이터프레임
+    priority_df = pd.DataFrame({
+        'Priority Score': priority_score
+    }, index=[0, 1, 2])
+    
+    # 자치구-클러스터 매핑
+    gu_cluster_df = pd.DataFrame({
+        '자치구': ['종로구', '중구', '용산구', '성동구', '광진구', '동대문구', '중랑구', '성북구', '강북구', '도봉구',
+                 '노원구', '은평구', '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구', '영등포구', '동작구',
+                 '관악구', '서초구', '강남구', '송파구', '강동구'],
+        '클러스터_PCA_3': [2, 2, 1, 1, 0, 0, 0, 0, 0, 0,
+                        0, 0, 1, 1, 0, 0, 0, 2, 1, 1,
+                        0, 1, 1, 0, 0]
+    })
+    
+    # 클러스터별 자치구명 리스트로 정리
+    cluster_gu_dict = gu_cluster_df.groupby('클러스터_PCA_3')['자치구'].apply(list).to_dict()
+    
+    # 우선순위 높은 순으로 정렬
+    priority_df_sorted = priority_df.sort_values('Priority Score', ascending=True)
+    priority_df_sorted['정책 도입 순위'] = range(1, len(priority_df_sorted) + 1)
+    
+    # 각 순위별로 포함된 자치구 출력
+    print(" 클러스터별 최종 정책 도입 순위 및 자치구:")
+    for idx, row in priority_df_sorted.iterrows():
+        cluster_id = idx
+        gu_list = cluster_gu_dict.get(cluster_id, [])
+        순위 = int(row['정책 도입 순위'])
+        print(f"\n순위 {순위}위 (클러스터 {cluster_id}) - 정책 시급도: {row['Priority Score']:.3f}")
+        print("포함된 자치구:", ', '.join(gu_list))
+    ```
+    
+- 클러스터별 종합점수 계산 바탕으로 우선순위 설정
+- 최종 정책 도입 순위 및 자치구
+    <pre>
+    1순위 : Sub-cluster 2 , 정책 시급도 : -0.190
+    포함된 자치구: 종로구, 중구, 금천구
+    2순위 : Sub-cluster 0 , 정책 시급도 : -0.018
+    포함된 자치구: 광진구, 동대문구, 중랑구, 성북구, 강북구, 도봉구, 노원구, 은평구, 양천구, 구서구, 구로구, 관악구, 송파구, 강동구
+    3순위 : Sub-cluster 1 , 정책 시급도 : 0.208
+    포함된 자치구 : 용산구, 성동구, 서대문구, 마포구, 영등포구, 동작구, 서초구, 강남구
+    </pre>
+- 실제 종로구는 노인 복지 사각지대 문제 진행 중
+    -> 분석 결과 신뢰할만 함
+![image](사진 자료 : 뉴스 이미지 삽입)
+
+    
 (6) Cluster 1은 다른 클러스터들에 비해 내부 특성 차이가 크고, 정책적으로도 세분화가 필요한 지역들이 포함되어 있어 Cluster 1의 세부 클러스터링 진행
 (7) Elbow & Silhouette 분석 진행 결과, Cluster 1도 3개의 하위 그룹으로 나누는 것이 적절
 <img src="https://github.com/user-attachments/assets/02920aaa-5e98-42b3-9076-ee9f0b305de0" width="650" height="350"/>
-(8) Cluster 1안에서도 서로 다른 복지 특성을 가지는 자치구들이 존재함을 지도 시각화를 통해 확인
+(8) Cluster 1 안에서도 서로 다른 복지 특성을 가지는 자치구들이 존재함을 지도 시각화를 통해 확인
 <img src="https://github.com/user-attachments/assets/d8998e84-c85f-4143-96da-87d163d8d0d9" width="400" height="300")
     </pre>
 
@@ -324,13 +419,9 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
     (3) Sub-cluster 2 (종로구, 중구, 금천구) (ppt수정)
         - 노인 인구는 많지만, 요양보호사 비중도 상대적으로 높음
     </pre>
-![image](시각화 자료 : Sub-cluster0~2 파이차트)
-- 대표 자치구 선정 (수정)
-    - 각 클러스터의 평균값을 구하고 평균값에 가장 가까운 자치구를 대표로 지정함
+
     <pre>
-    (1) Sub-cluster 0 : 광진구
-    (2) Sub-cluster 1 : 용산구
-    (3) Sub-cluster 2 : 종로구
+    
         </pre>
 ![image](시각화 자료 : 각 클러스터의 평균값 표)
 ![image](시각화 자료 : 각 클러스터의 대표값 표시 지도)
