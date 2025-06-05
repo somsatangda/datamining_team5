@@ -312,8 +312,6 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 <img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
 
 (6) 분석 결과 해석<br>
-<img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
-<pre>
 -cluster 0 : 광진구, 동대문구, 중랑구, 성북구, 강북구, 도봉구, 노원구, 은평구, 양천구, 강서구, 구로구, 관악구, 송파구, 강동구
     - 노인 인구와 관련 인프라가 가장 크고 풍부한 지역이며, 노인 인구와 요양보호사 수가 많음
     - "실버 메가폴리스" 지역
