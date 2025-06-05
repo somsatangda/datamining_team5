@@ -378,7 +378,7 @@ weights = {
     'vulnerable': 0.45
 }
 ```
-시각화 자료 : 정책 영역별 중요성
+![image](시각화 자료 : 정책 영역별 중요성)
 ```python
 # 카테고리별 평균 점수 (취약계층 역방향)
 infra_score = standardized[infra_vars].mean(axis=1)
@@ -439,7 +439,7 @@ for idx, row in priority_df_sorted.iterrows():
     -> 분석 결과 신뢰할만 함
 ![image](사진 자료 : 뉴스 이미지 삽입)
 
-## 8. 결론 및 정책 제안 (수정필요)
+## 8. 결론 및 정책 제안
 (1) cluster0
 <pre>
 시설 중심에서 커뮤니티 중심으로 전환
@@ -449,6 +449,7 @@ for idx, row in priority_df_sorted.iterrows():
 <pre>
 현행 수준 유지 + 선도 모델 전환
 </pre>
+(3) cluster2
 <pre>
 요양보호사 및 복지 인력 확충
 고립노인 예방 프로그램
