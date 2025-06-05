@@ -67,7 +67,6 @@ final/ : 결과 정리 및 정책 제안안
 ## 3. 데이터 전처리
 - 변수별 처리 내용
     (1) 고령자 인구 & 노인 자살률 : 전체 자살률 × 전국 노인 비중으로 추정치 계산
-        <pre>
     ```python
     df_raw =pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/자살률(구별).xlsx")
 
@@ -92,9 +91,7 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
     (2) 독거노인, 저소득노인, 기초수급자 수: 수치형 변환 및 병합
-        <pre>
     ```python
     lonely_df = pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/독거 노인 인구.xlsx")
 
@@ -118,9 +115,7 @@ final/ : 결과 정리 및 정책 제안안
     df = pd.merge(df, lonely_cleaned, on='자치구', how='left')
 
     ```
-    </pre>
     (3) 복지시설(의료, 재가, 여가): 자치구별 시설 수 count 후 병합
-        <pre>
     ```python
     medical_df = pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 노인의료복지시설현황.xlsx")
 
@@ -150,8 +145,6 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
-        <pre>
     ```python
     homecare_df = pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 재가노인 복지시설 현황.xlsx")
 
@@ -184,8 +177,6 @@ final/ : 결과 정리 및 정책 제안안
     df = df.rename(columns={'재가노인 복지시설 수(개소)': '재가노인복지시설 수'})
     df
     ```
-    </pre>
-        <pre>
     ```python
     leisure_df = pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 노인여가 복지시설 현황 .xlsx")
 
@@ -204,9 +195,7 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
     (4) 요양보호사 수: 결측치(중랑구)는 전체 평균으로 대체
-        <pre>
     ```python
     caregiver_df = pd.read_csv("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 요양보호사 남녀별 자격 현황정보.csv", encoding='cp949')
 
@@ -215,8 +204,6 @@ final/ : 결과 정리 및 정책 제안안
     for gu in gu_names:
         print(gu)
     ```
-    </pre>
-        <pre>
     ```python
     caregiver_by_gu = caregiver_df.groupby('자치구명')['인원(명)'].sum().reset_index()
     caregiver_by_gu.rename(columns={'자치구명': '자치구', '인원(명)': '요양보호사 수'}, inplace=True)
@@ -226,16 +213,12 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
-        <pre>
     ```python
     # 요양보호사 수의 평균으로 중랑구 결측치 채우기
     mean_caregiver = df['요양보호사 수'].mean()
     df.loc[df['자치구'] == '중랑구', '요양보호사 수'] = mean_caregiver
     ```
-    </pre>
     (5) 정류장 수 & 평균 노선 수: 그룹 통계 계산 후 병합
-        <pre>
     ```python
     bus_stop_df = pd.read_excel("/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 정류소현황(2019~2023년).xlsx")
 
@@ -254,9 +237,7 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
     (6) 노인 보행 교통사고: 최신 통계값 병합
-        <pre>
     ```python
     traffic_data = pd.read_excel('/content/drive/MyDrive/코랩/데이터마이닝/팀플/data/서울시 노인 교통사고 현황 통계.xlsx', sheet_name='데이터')
 
@@ -267,7 +248,6 @@ final/ : 결과 정리 및 정책 제안안
 
     df
     ```
-    </pre>
 - 데이터 정제
     - 불필요한 열 제거 및 열 이름 통일
     - 문자형 → 수치형 변환
@@ -351,7 +331,6 @@ final/ : 결과 정리 및 정책 제안안
 ## 7. 정책 우선순위 도출
 - 변수 카테고리 : 인프라, 서비스, 이동성, 취약성
 - 변수별 가중치 설정 : 전문가가 평가한 정책별 중요도 평가를 통해서 가중치 설정함
-    <pre>
 ```python
 #  카테고리별 변수 지정
 infra_vars = ['1인당 복지관 수', '1인당 노인의료복지시설 수', '1인당 재가노인복지시설 수']
@@ -370,11 +349,53 @@ weights = {
     'vulnerable': 0.45
 }
 ```
-</pre>
 시각화 자료 : 정책 영역별 중요성
-<pre>
-코드삽입 : 각 변수 * 가중치 -> 점수 산출
-</pre>
+```python
+# 카테고리별 평균 점수 (취약계층 역방향)
+infra_score = standardized[infra_vars].mean(axis=1)
+service_score = standardized[service_vars].mean(axis=1)
+mobility_score = standardized[mobility_vars].mean(axis=1)
+vulnerable_score = -standardized[vulnerable_vars].mean(axis=1)
+
+# 가중합으로 최종 우선순위 점수 계산
+priority_score = (
+    infra_score * weights['infra'] +
+    service_score * weights['service'] +
+    mobility_score * weights['mobility'] +
+    vulnerable_score * weights['vulnerable']
+)
+
+# 결과 데이터프레임
+priority_df = pd.DataFrame({
+    'Priority Score': priority_score
+}, index=[0, 1, 2])
+
+# 자치구-클러스터 매핑
+gu_cluster_df = pd.DataFrame({
+    '자치구': ['종로구', '중구', '용산구', '성동구', '광진구', '동대문구', '중랑구', '성북구', '강북구', '도봉구',
+             '노원구', '은평구', '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구', '영등포구', '동작구',
+             '관악구', '서초구', '강남구', '송파구', '강동구'],
+    '클러스터_PCA_3': [2, 2, 1, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 1, 1, 0, 0, 0, 2, 1, 1,
+                    0, 1, 1, 0, 0]
+})
+
+# 클러스터별 자치구명 리스트로 정리
+cluster_gu_dict = gu_cluster_df.groupby('클러스터_PCA_3')['자치구'].apply(list).to_dict()
+
+# 우선순위 높은 순으로 정렬
+priority_df_sorted = priority_df.sort_values('Priority Score', ascending=True)
+priority_df_sorted['정책 도입 순위'] = range(1, len(priority_df_sorted) + 1)
+
+# 각 순위별로 포함된 자치구 출력
+print(" 클러스터별 최종 정책 도입 순위 및 자치구:")
+for idx, row in priority_df_sorted.iterrows():
+    cluster_id = idx
+    gu_list = cluster_gu_dict.get(cluster_id, [])
+    순위 = int(row['정책 도입 순위'])
+    print(f"\n순위 {순위}위 (클러스터 {cluster_id}) - 정책 시급도: {row['Priority Score']:.3f}")
+    print("포함된 자치구:", ', '.join(gu_list))
+```
 - 클러스터별 종합점수 계산 바탕으로 우선순위 설정
 - 최종 정책 도입 순위 및 자치구
     <pre>
@@ -399,25 +420,25 @@ weights = {
 
 ## 9. 한계점 및 향후 개선 방안
 - 한계점 1. 변수 구성 제약
-    <pre>
+<pre>
     - 노인 자살률 데이터 확보가 어려워 추정된 데이터 사용함
     - 중랑구 요양 보호사 수를 정확히 알 수 없음
     - 정량적 수치 기반으로 정성적 요소 반영하지 못 함
 => 개선 방안
     - 더욱 자세한 데이터 확보
     - 노인 대상 설문조사 및 인터뷰 결과를 정성 변수로 포함
-    </pre>
+</pre>
 - 한계점 2. 특정 대규모 자치구 영향력 과대 가능성
-    <pre>
+<pre>
     - 노인 인구 수가 많은 자치구가 클러스터 중심에 크게 영향을 줄 수 있어 중소 자치구 특성이 묻히는 문제 발생 가능성 있음
 => 개선 방안
     - 경우에 따라 가중치 없는 거리 기반 군집화 방식 도입 고려
-    </pre>
+</pre>
 - 한계점 3. 데이터 최신성 및 범위의 제한
-    <pre>
+<pre>
     - 2023년도 기준 데이터 활용으로 데이터 최신성이 떨어짐
     - 분석 지역이 서울시로 한정되어 있어 일반화에 제약 있음
 => 개선 방안
     - 최신 연도 기준 데이터로 주기적 업데이트 진행
     - 서울 외 타 광역시 또는 전국 단위로 지역 비교 분석 확대
-    </pre>
+</pre>
