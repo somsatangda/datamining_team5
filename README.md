@@ -305,8 +305,9 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 <img src="https://github.com/user-attachments/assets/32f0cbf0-df83-42b2-afc5-b7862dcd4c88" width="500" height="350"/>
 
 (4) 2차원 PCA결과에 대해 k=2~6까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)<br>
-<pg.12의 그림 2 삽입>
-
+<pre>
+    <pg.12의 그림 2 삽입>
+</pre>
 (5) 최종적으로 k=3으로 클러스터링 수행 후 시각화를 통해 지역 분포 확인<br>
 <img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
 <pre>
