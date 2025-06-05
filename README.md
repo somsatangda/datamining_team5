@@ -304,13 +304,15 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 (3) PCA 분석을 통해 2차원으로 축소하여 시각화 및 클러스터링 수행<br>
 <img src="https://github.com/user-attachments/assets/32f0cbf0-df83-42b2-afc5-b7862dcd4c88" width="500" height="350"/>
 
-(4) 2차원 PCA결과에 대해 k=2~10까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)<br>
+(4) 2차원 PCA결과에 대해 k=2~6까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)<br>
+<pg.12의 그림 2 삽입>
 
-(5) 최종적으로 k=3으로 클러스터링 수행 후 k=2~6까지의 경우를 시각화를 통해 지역 분포 확인<br>
-<img src="https://github.com/user-attachments/assets/38c527cb-f2b9-47cc-aed0-a12c2e30a287" width="500" height="350"/>
+(5) 최종적으로 k=3으로 클러스터링 수행 후 시각화를 통해 지역 분포 확인<br>
+<img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
+<pre>
 
 (6) 분석 결과 해석<br>
-<img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="400" height="300"/>
+<img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
 <pre>
 -cluster 0 : 광진구, 동대문구, 중랑구, 성북구, 강북구, 도봉구, 노원구, 은평구, 양천구, 강서구, 구로구, 관악구, 송파구, 강동구
     - 노인 인구와 관련 인프라가 가장 크고 풍부한 지역이며, 노인 인구와 요양보호사 수가 많음
