@@ -1,5 +1,5 @@
 # 서울시 노인 돌봄 서비스 수요 예측 및 사각지대 분석
-![image](기사 사진)
+<img src="https://github.com/user-attachments/assets/29e03c6a-b410-442f-a761-9593758d2f7d" width="500" height="300"/>
 ## 프로젝트 개요
 ### 프로젝트 배경
 <pre>
