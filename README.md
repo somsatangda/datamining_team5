@@ -310,7 +310,6 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 </pre>
 (5) 최종적으로 k=3으로 클러스터링 수행 후 시각화를 통해 지역 분포 확인<br>
 <img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
-<pre>
 
 (6) 분석 결과 해석<br>
 <img src="https://github.com/user-attachments/assets/5fdbb144-2bc5-4e1c-857d-4ae03893f5f2" width ="500" height="350"/>
