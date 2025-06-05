@@ -305,14 +305,12 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 <img src="https://github.com/user-attachments/assets/32f0cbf0-df83-42b2-afc5-b7862dcd4c88" width="500" height="350"/>
 (4) 2차원 PCA결과에 대해 k=2~6까지의 실루엣 계수와 엘보우 분석을 통해 최적 k선정(k=3)
 (5) 최종적으로 k=3으로 클러스터링 수행 후 k=2~6까지의 경우를 시각화를 통해 지역 분포 확인
-![image](시각화 자료 : 지도 시각화)
+<img src="https://github.com/user-attachments/assets/38c527cb-f2b9-47cc-aed0-a12c2e30a287" width="500" height="350"/)
 (6) Cluster 1은 다른 클러스터들에 비해 내부 특성 차이가 크고, 정책적으로도 세분화가 필요한 지역들이 포함되어 있어 Cluster 1의 세부 클러스터링 진행
 (7) Elbow & Silhouette 분석 진행 결과, Cluster 1도 3개의 하위 그룹으로 나누는 것이 적절
-![image](시각화 자료 : Elbow Method & Silhoutte Score PCA)
+<img src="https://github.com/user-attachments/assets/02920aaa-5e98-42b3-9076-ee9f0b305de0" width="650" height="350"/>
 (8) Cluster 1안에서도 서로 다른 복지 특성을 가지는 자치구들이 존재함을 지도 시각화를 통해 확인
-![image](시각화 자료 : k=3일 때 Cluster 1의 Sub-clusters)
-(9) Sub-cluster 0~2에 대해 서로 차이가 큰 변수들의 비율을 차트로 시각화
-![image](시각화 자료 : Sub-cluster 0~2 파이차트)
+<img src="https://github.com/user-attachments/assets/d8998e84-c85f-4143-96da-87d163d8d0d9" width="400" height="300")
     </pre>
 
 ## 6. 클러스터링 해석 및 시각화
