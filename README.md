@@ -280,7 +280,7 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
     - 문자형 → 수치형 변환
     - 결측치(NaN) → 0 또는 평균값으로 대체
 - 최종적으로 분석에 사용한 전처리 데이터
-<img src="https://github.com/user-attachments/assets/8b6efd1d-5b97-4e59-913e-575f9ea6cc3d" width="400" height="350")
+- <img src="https://github.com/user-attachments/assets/8b6efd1d-5b97-4e59-913e-575f9ea6cc3d" width="400" height="350"/>
 
 ## 4. EDA
 - boxplot : 변수들의 이상치 및 분포 확인
