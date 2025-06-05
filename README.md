@@ -333,6 +333,7 @@ cluster1에 포함된 지역만 따로 재분석하여 세분화
 - Cluster 1은 이미 '중간 규모'라는 범위로 묶였지만, 내부에서도 미묘한 차이가 있을 수 있고 '중간' 지역이 오히려 변화나 위기에 더 민감할 수 있다는 판단
 - Elbow & Silhouette 분석 진행 결과, Cluster 1도 3개의 하위 그룹으로 나누는 것이 적절
 <img src="https://github.com/user-attachments/assets/02920aaa-5e98-42b3-9076-ee9f0b305de0" width="650" height="350"/>
+<pre></pre>
 - Cluster 1 안에서도 서로 다른 복지 특성을 가지는 자치구들이 존재함을 지도 시각화를 통해 확인
 <img src="https://github.com/user-attachments/assets/d8998e84-c85f-4143-96da-87d163d8d0d9" width="400" height="300"/>
 <pre>
