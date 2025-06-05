@@ -1,6 +1,8 @@
 # 서울시 노인 돌봄 서비스 수요 예측 및 사각지대 분석
 <img src="https://github.com/user-attachments/assets/29e03c6a-b410-442f-a761-9593758d2f7d" width="500" height="300"/>
+<pre>
 ## 프로젝트 개요
+<pre>
 ### 프로젝트 배경
 <pre>
 고령화 사회로의 진입에 따라 노인 복지 수요가 증가하고 있으며, 지역 간 복지 서비스 격차도 심화되고 있음.
